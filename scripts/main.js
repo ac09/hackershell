@@ -28,12 +28,17 @@ function validate()
 
 	//colsole.log("executed");
 	var name = document.f2.reg_username.value;
+	var name1= document.f2.reg_name.value;
+	var alphaExp = /^[a-zA-Z]+$/;
+	var numExp= /^[0-9]+$/;
 	var password = document.f2.reg_password.value;
 	var retype = document.f2.reg_retype.value;
 	var email = document.f2.reg_email.value;
+	var mobile=document.f2.reg_mobile.value;
 
 	var atposition=email.indexOf("@");  
 	var dotposition=email.lastIndexOf(".");  
+	var spaceposition=email.indexOf(" ");
 	var result_captcha = ValidCaptcha();
 	if(result_captcha == false)
 	{
@@ -54,11 +59,18 @@ function validate()
   		alert("Password must be at least 6 characters long.");  
   		return false;  
   	}
-  	else if (atposition<1 || dotposition<atposition+2 || dotposition+2>=email.length)
-  	{  
-  		alert("Please enter a valid e-mail address \n ");  
-  		return false;  
-  	} 
+  	else if(name.length>40)
+  	{
+  	alert("length of username should be less than 40");
+  	}
+           else if(!name1.match(alphaExp))
+           alert("Name should contain alphabet");
+           
+         else if(!mobile.match(numExp))
+           alert("Mobile should conation digits");
+  	else if (atposition==-1 || atposition==0 || dotposition==-1 || dotposition==0 || email.length <(dotposition+1) ||spacepostion!=-1) 
+  		alert("Please enter a valid e-mail address \n "); 
+  		 
   	else 
   	{
   		return true;
